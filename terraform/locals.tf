@@ -14,6 +14,15 @@ locals {
     ecs_cluster_name = module.naming.resources.ecs-cluster.name
   }
 
+  ecr = {
+    ecr_name             = module.naming.resources.ecr.name
+    ecr_repository_type  = "private"
+    image_tag_mutability = "IMMUTABLE"
+    ecr_force_delete     = var.ecr_force_delete
+    encryption_type      = "KMS"
+    scan_on_push         = var.ecr_scan_on_push
+  }
+
   tags = {
     Environment = var.env
     Application = var.application

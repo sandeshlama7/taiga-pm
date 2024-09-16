@@ -70,3 +70,18 @@ variable "number_of_azs" {
 #   description = "Whether to create vpc module or not"
 #   type        = bool
 # }
+
+#################################################################################
+# variables for ECR
+#################################################################################
+variable "ecr_force_delete" {
+  description = "Force delete ecr"
+  type        = bool
+  default     = false
+}
+
+variable "ecr_scan_on_push" {
+  description = "Scan image when pushed to ECR"
+  type        = bool
+  default     = true
+}
