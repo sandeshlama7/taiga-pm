@@ -11,7 +11,7 @@ locals {
   private_subnet_ids = local.vpc.create_vpc != true ? var.private_subnet_ids : module.vpc.private_subnets
 
   ecs = {
-    cluster_name = module.naming.resources.ecs-cluster.name
+    ecs_cluster_name = module.naming.resources.ecs-cluster.name
   }
 
   tags = {
