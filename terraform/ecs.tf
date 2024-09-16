@@ -79,4 +79,6 @@ module "ecs_service" {
     }
   }
 
+  tags = local.tags
+
 }
