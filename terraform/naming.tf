@@ -3,7 +3,7 @@ module "naming" {
 
   app_name       = "taiga"
   project_prefix = "pm-infra"
-  app_name_short = "pm"
+  app_name_short = "taiga"
   aws_region     = var.region
   environment    = var.naming_environment
   tags = {

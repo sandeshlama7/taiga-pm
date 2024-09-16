@@ -17,6 +17,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_ecs_cluster"></a> [ecs\_cluster](#module\_ecs\_cluster) | ./modules/terraform-aws-ecs/modules/cluster | n/a |
 | <a name="module_naming"></a> [naming](#module\_naming) | ./modules/terraform-naming-convention-module | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | ./modules/terraform-aws-vpc-module | n/a |
 
@@ -34,6 +35,7 @@
 | <a name="input_env"></a> [env](#input\_env) | Name of the environment | `string` | n/a | yes |
 | <a name="input_naming_environment"></a> [naming\_environment](#input\_naming\_environment) | Name of the environment | `string` | n/a | yes |
 | <a name="input_number_of_azs"></a> [number\_of\_azs](#input\_number\_of\_azs) | number of availability zones | `number` | n/a | yes |
+| <a name="input_owner"></a> [owner](#input\_owner) | Owner name | `string` | n/a | yes |
 | <a name="input_private_subnet_ids"></a> [private\_subnet\_ids](#input\_private\_subnet\_ids) | Private subnet ids | `list(string)` | `[]` | no |
 | <a name="input_project"></a> [project](#input\_project) | Project name | `string` | n/a | yes |
 | <a name="input_public_subnet_ids"></a> [public\_subnet\_ids](#input\_public\_subnet\_ids) | Public subnet ids | `list(string)` | `[]` | no |

@@ -10,10 +10,15 @@ locals {
   public_subnet_ids  = local.vpc.create_vpc != true ? var.public_subnet_ids : module.vpc.public_subnets
   private_subnet_ids = local.vpc.create_vpc != true ? var.private_subnet_ids : module.vpc.private_subnets
 
+  ecs = {
+    cluster_name = module.naming.resources.ecs-cluster.name
+  }
+
   tags = {
     Environment = var.env
     Application = var.application
     Project     = var.project
+    Owner       = var.owner
   }
 
 }

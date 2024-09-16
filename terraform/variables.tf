@@ -30,6 +30,10 @@ variable "project" {
   type        = string
 }
 
+variable "owner" {
+  description = "Owner name"
+  type        = string
+}
 
 #################################################################################
 # variables for VPC

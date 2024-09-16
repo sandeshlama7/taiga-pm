@@ -7,6 +7,7 @@ env                = "dev"
 naming_environment = "development"
 application        = "taiga"
 project            = "project_management"
+owner              = "sameep"
 
 vpc_cidr = "10.0.0.0/16"
 # create_vpc         = false
