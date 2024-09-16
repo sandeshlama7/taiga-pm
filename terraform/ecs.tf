@@ -13,6 +13,7 @@ module "ecs_cluster" {
     FARGATE = {
       default_capacity_provider_strategy = {
         weight = 100
+        base   = 0
       }
     }
   }
