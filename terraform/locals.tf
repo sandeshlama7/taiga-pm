@@ -12,6 +12,13 @@ locals {
 
   ecs = {
     ecs_cluster_name = module.naming.resources.ecs-cluster.name
+    ecs_service_name = module.naming.resources.ecs-service.name
+
+    nginx_container_name = "nginx"
+    nginx_container_port = 80
+    nginx_host_port      = 80
+
+    container_port = 80
   }
 
   ecr = {
