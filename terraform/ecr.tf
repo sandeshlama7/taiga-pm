@@ -10,4 +10,6 @@ module "ecr" {
   encryption_type      = local.ecr.encryption_type
   scan_on_push         = local.ecr.scan_on_push
 
+  tags = local.tags
+
 }
