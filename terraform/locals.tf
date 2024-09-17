@@ -7,6 +7,7 @@ locals {
   }
 
   vpc_id             = local.vpc.create_vpc != true ? var.vpc_id : module.vpc.vpc_id
+  vpc_cidr           = local.vpc.create_vpc != true ? var.vpc_cidr : module.vpc.vpc_cidr_block
   public_subnet_ids  = local.vpc.create_vpc != true ? var.public_subnet_ids : module.vpc.public_subnets
   private_subnet_ids = local.vpc.create_vpc != true ? var.private_subnet_ids : module.vpc.private_subnets
 
@@ -28,6 +29,17 @@ locals {
     ecr_force_delete     = var.ecr_force_delete
     encryption_type      = "KMS"
     scan_on_push         = var.ecr_scan_on_push
+  }
+
+  efs = {
+    efs_name                           = module.naming.resources.efs.name
+    encrypted                          = true
+    attach_policy                      = true
+    bypass_policy_lockout_safety_check = false
+    security_group_vpc_id              = local.vpc_id
+    security_group_description         = "EFS security group"
+    security_group_cidr_block          = local.vpc_cidr
+    efs_backup_policy                  = true
   }
 
   tags = {

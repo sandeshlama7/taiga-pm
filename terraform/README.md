@@ -20,6 +20,7 @@
 | <a name="module_ecr"></a> [ecr](#module\_ecr) | ./modules/terraform-aws-ecr-module | n/a |
 | <a name="module_ecs_cluster"></a> [ecs\_cluster](#module\_ecs\_cluster) | ./modules/terraform-aws-ecs/modules/cluster | n/a |
 | <a name="module_ecs_service"></a> [ecs\_service](#module\_ecs\_service) | ./modules/terraform-aws-ecs/modules/service | n/a |
+| <a name="module_efs"></a> [efs](#module\_efs) | ./modules/terraform-aws-efs-module | n/a |
 | <a name="module_naming"></a> [naming](#module\_naming) | ./modules/terraform-naming-convention-module | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | ./modules/terraform-aws-vpc-module | n/a |
 
