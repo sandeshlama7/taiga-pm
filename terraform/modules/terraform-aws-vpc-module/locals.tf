@@ -13,7 +13,7 @@ locals {
     local.len_database_subnets,
   )
 
-  vpc_id     = var.create_vpc != false ? aws_vpc.this[0].id : null
+  vpc_id     = try(aws_vpc.this[0].id, null)
   create_vpc = var.create_vpc
 
   create_public_subnets = local.create_vpc && local.len_public_subnets > 0
