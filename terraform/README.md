@@ -17,11 +17,11 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ecr"></a> [ecr](#module\_ecr) | git@github.com:adexltd/terraform-aws-ecr-module.git | n/a |
-| <a name="module_ecs"></a> [ecs](#module\_ecs) | git@github.com:terraform-aws-modules/terraform-aws-ecs.git | n/a |
-| <a name="module_efs"></a> [efs](#module\_efs) | git@github.com:adexltd/terraform-aws-efs-module.git | n/a |
+| <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 2.3.0 |
+| <a name="module_ecs"></a> [ecs](#module\_ecs) | terraform-aws-modules/ecs/aws | 5.11.4 |
+| <a name="module_efs"></a> [efs](#module\_efs) | terraform-aws-modules/efs/aws | 1.6.3 |
 | <a name="module_naming"></a> [naming](#module\_naming) | git@github.com:adexltd/terraform-naming-convention-module.git | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | git@github.com:adexltd/terraform-aws-vpc-module.git | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | 5.13.0 |
 
 ## Resources
 

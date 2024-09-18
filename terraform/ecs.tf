@@ -3,7 +3,8 @@
 ################################################################################
 
 module "ecs" {
-  source = "git@github.com:terraform-aws-modules/terraform-aws-ecs.git"
+  source  = "terraform-aws-modules/ecs/aws"
+  version = "5.11.4"
 
   cluster_name = local.ecs.ecs_cluster_name
 

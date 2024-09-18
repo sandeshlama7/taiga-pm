@@ -1,5 +1,6 @@
 module "efs" {
-  source = "git@github.com:adexltd/terraform-aws-efs-module.git"
+  source  = "terraform-aws-modules/efs/aws"
+  version = "1.6.3"
 
   # File system
   name           = local.efs.efs_name
@@ -20,7 +21,7 @@ module "efs" {
   bypass_policy_lockout_safety_check = local.efs.bypass_policy_lockout_safety_check
   policy_statements = [
     {
-      sid = "Example"
+      sid = "Acess EFS by ECS cluster"
       actions = [
         "elasticfilesystem:ClientMount",
         "elasticfilesystem:ClientWrite",

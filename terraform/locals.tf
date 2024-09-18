@@ -22,12 +22,13 @@ locals {
   }
 
   ecr = {
-    ecr_name             = module.naming.resources.ecr.name
-    ecr_repository_type  = "private"
-    image_tag_mutability = "IMMUTABLE"
-    ecr_force_delete     = var.ecr_force_delete
-    encryption_type      = "KMS"
-    scan_on_push         = var.ecr_scan_on_push
+    ecr_name                = module.naming.resources.ecr.name
+    ecr_repository_type     = "private"
+    image_tag_mutability    = "IMMUTABLE"
+    ecr_force_delete        = var.ecr_force_delete
+    encryption_type         = "KMS"
+    scan_on_push            = var.ecr_scan_on_push
+    create_lifecycle_policy = false
   }
 
   efs = {

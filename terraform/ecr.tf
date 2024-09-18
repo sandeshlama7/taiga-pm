@@ -1,14 +1,16 @@
 #ECR with KMS encryption
 module "ecr" {
-  source = "git@github.com:adexltd/terraform-aws-ecr-module.git"
+  source  = "terraform-aws-modules/ecr/aws"
+  version = "2.3.0"
 
-  name = local.ecr.ecr_name
+  repository_name = local.ecr.ecr_name
 
-  repository_type      = local.ecr.ecr_repository_type
-  image_tag_mutability = local.ecr.image_tag_mutability
-  force_delete         = local.ecr.ecr_force_delete
-  encryption_type      = local.ecr.encryption_type
-  scan_on_push         = local.ecr.scan_on_push
+  repository_type                 = local.ecr.ecr_repository_type
+  repository_image_tag_mutability = local.ecr.image_tag_mutability
+  repository_force_delete         = local.ecr.ecr_force_delete
+  repository_encryption_type      = local.ecr.encryption_type
+  repository_image_scan_on_push   = local.ecr.scan_on_push
+  create_lifecycle_policy         = local.ecr.create_lifecycle_policy
 
   tags = local.tags
 

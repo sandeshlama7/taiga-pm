@@ -5,17 +5,16 @@
 
 
 module "vpc" {
-  source = "git@github.com:adexltd/terraform-aws-vpc-module.git"
-  # source  = "terraform-aws-modules/vpc/aws"
-  # version = "5.13.0"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "5.13.0"
 
 
 
   create_vpc = local.vpc.create_vpc
 
-  name   = local.vpc.vpc_name
-  cidr   = local.vpc.vpc_cidr
-  region = var.region # Community module for vpc doesnot include region and region is used based upon what is mentioned in the provider file.
+  name = local.vpc.vpc_name
+  cidr = local.vpc.vpc_cidr
+  # region = var.region # Community module for vpc doesnot include region and region is used based upon what is mentioned in the provider file.
 
   azs              = local.vpc.azs
   private_subnets  = [for k, v in local.vpc.azs : cidrsubnet(local.vpc.vpc_cidr, 4, k)]
