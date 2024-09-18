@@ -44,8 +44,6 @@ module "ecs_service" {
   container_definitions = {
 
     nginx = {
-      cpu       = 512
-      memory    = 1024
       essential = true
       image     = "426857564226.dkr.ecr.us-east-1.amazonaws.com/pm-infra/taiga:latest"
       port_mappings = [
