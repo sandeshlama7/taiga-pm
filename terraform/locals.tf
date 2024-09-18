@@ -17,8 +17,7 @@ locals {
     nginx_container_name = "nginx"
     nginx_container_port = 80
     nginx_host_port      = 80
-
-    container_port = 80
+    container_port       = 80
   }
 
   ecr = {
@@ -26,10 +25,13 @@ locals {
     ecr_repository_type     = "private"
     image_tag_mutability    = "IMMUTABLE"
     ecr_force_delete        = var.ecr_force_delete
-    encryption_type         = "KMS"
+    encryption_type         = "AES256"
     scan_on_push            = var.ecr_scan_on_push
     create_lifecycle_policy = false
   }
+
+  ecr_repository_url = data.aws_ecr_repository.service.repository_url
+
 
   efs = {
     efs_name                           = module.naming.resources.efs.name

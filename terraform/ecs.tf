@@ -35,7 +35,7 @@ module "ecs" {
 
         nginx = {
           essential = true
-          image     = "426857564226.dkr.ecr.us-east-1.amazonaws.com/pm-infra/taiga:latest"
+          image     = "${local.ecr_repository_url}:latest"
           port_mappings = [
             {
               name          = local.ecs.nginx_container_name
