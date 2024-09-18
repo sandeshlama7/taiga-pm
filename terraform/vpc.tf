@@ -5,7 +5,7 @@
 
 
 module "vpc" {
-  source = "./modules/terraform-aws-vpc-module"
+  source = "git@github.com:adexltd/terraform-aws-vpc-module.git"
   # source  = "terraform-aws-modules/vpc/aws"
   # version = "5.13.0"
 

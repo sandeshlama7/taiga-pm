@@ -17,12 +17,11 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ecr"></a> [ecr](#module\_ecr) | ./modules/terraform-aws-ecr-module | n/a |
-| <a name="module_ecs_cluster"></a> [ecs\_cluster](#module\_ecs\_cluster) | ./modules/terraform-aws-ecs/modules/cluster | n/a |
-| <a name="module_ecs_service"></a> [ecs\_service](#module\_ecs\_service) | ./modules/terraform-aws-ecs/modules/service | n/a |
-| <a name="module_efs"></a> [efs](#module\_efs) | ./modules/terraform-aws-efs-module | n/a |
-| <a name="module_naming"></a> [naming](#module\_naming) | ./modules/terraform-naming-convention-module | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | ./modules/terraform-aws-vpc-module | n/a |
+| <a name="module_ecr"></a> [ecr](#module\_ecr) | git@github.com:adexltd/terraform-aws-ecr-module.git | n/a |
+| <a name="module_ecs"></a> [ecs](#module\_ecs) | git@github.com:terraform-aws-modules/terraform-aws-ecs.git | n/a |
+| <a name="module_efs"></a> [efs](#module\_efs) | git@github.com:adexltd/terraform-aws-efs-module.git | n/a |
+| <a name="module_naming"></a> [naming](#module\_naming) | git@github.com:adexltd/terraform-naming-convention-module.git | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | git@github.com:adexltd/terraform-aws-vpc-module.git | n/a |
 
 ## Resources
 

@@ -1,6 +1,6 @@
 #ECR with KMS encryption
 module "ecr" {
-  source = "./modules/terraform-aws-ecr-module"
+  source = "git@github.com:adexltd/terraform-aws-ecr-module.git"
 
   name = local.ecr.ecr_name
 

@@ -1,5 +1,5 @@
 module "efs" {
-  source = "./modules/terraform-aws-efs-module"
+  source = "git@github.com:adexltd/terraform-aws-efs-module.git"
 
   # File system
   name           = local.efs.efs_name

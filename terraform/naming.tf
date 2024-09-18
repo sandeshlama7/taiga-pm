@@ -1,5 +1,5 @@
 module "naming" {
-  source = "./modules/terraform-naming-convention-module"
+  source = "git@github.com:adexltd/terraform-naming-convention-module.git"
 
   app_name       = "taiga"
   project_prefix = "pm-infra"
