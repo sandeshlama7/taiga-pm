@@ -58,49 +58,13 @@ module "efs" {
 
   # Access point(s)
   access_points = {
-    nginx_access = {
-      name = "nginx-access"
-      root_directory = {
-        path = "/nginx"
-        creation_info = {
-          owner_gid   = 1001
-          owner_uid   = 1001
-          permissions = "755"
-        }
-      }
-    }
-
-    frontend_access = {
-      name = "frontend-access"
-      root_directory = {
-        path = "/frontend"
-        creation_info = {
-          owner_gid   = 1002
-          owner_uid   = 1002
-          permissions = "755"
-        }
-      }
-    }
-
-    backend_access = {
-      name = "backend-access"
-      root_directory = {
-        path = "/backend"
-        creation_info = {
-          owner_gid   = 1003
-          owner_uid   = 1003
-          permissions = "750"
-        }
-      }
-    }
-
     rabbitmq_access = {
       name = "rabbitmq-access"
       root_directory = {
         path = "/rabbitmq"
         creation_info = {
-          owner_gid   = 1004
-          owner_uid   = 1004
+          owner_gid   = 1001
+          owner_uid   = 1001
           permissions = "750"
         }
       }
