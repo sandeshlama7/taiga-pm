@@ -94,3 +94,54 @@ variable "alb_enable_deletion_protection" {
   type        = bool
   default     = true
 }
+
+#################################################################################
+# variables for RDS
+#################################################################################
+variable "rds_username" {
+  description = "Username of RDS"
+  type        = string
+  default     = null
+}
+
+variable "rds_multi_az" {
+  description = "Create RDS multi az"
+  type        = bool
+  default     = true
+}
+
+variable "rds_deletion_protection" {
+  description = "Deletion protection for RDS"
+  type        = bool
+  default     = true
+}
+
+variable "database_subnet_group_name" {
+  description = "DB subnet group name"
+  type        = string
+  default     = null
+}
+
+variable "skip_final_snapshot" {
+  description = "Skip final snapshot"
+  type        = bool
+  default     = false
+}
+
+variable "rds_monitoring_interval" {
+  description = "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60."
+  type        = number
+  default     = 0
+}
+
+variable "create_monitoring_role" {
+  description = "Create monitoring role"
+  type        = bool
+  default     = false
+}
+
+variable "parameter_group_use_name_prefix" {
+  description = "Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix"
+  type        = bool
+  default     = true
+}

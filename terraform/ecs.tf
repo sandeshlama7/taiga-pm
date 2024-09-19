@@ -36,7 +36,7 @@ module "ecs" {
 
         (local.ecs.container_name_1) = {
           essential = true
-          image     = "${local.ecr_repository_url}:front-latest"
+          image     = "${module.ecr.repository_url}:front-latest"
           port_mappings = [
             {
               name          = local.ecs.container_name_1
@@ -50,24 +50,7 @@ module "ecs" {
         }
       }
 
-      security_group_rules = {
-        alb_ingress_80 = {
-          type        = "ingress"
-          from_port   = local.ecs.container_port
-          to_port     = local.ecs.container_port_1
-          protocol    = "tcp"
-          description = "Service port"
-          # source_security_group_id = module.alb.security_group_id
-          cidr_blocks = ["0.0.0.0/0"]
-        }
-        egress_all = {
-          type        = "egress"
-          from_port   = 0
-          to_port     = 0
-          protocol    = "-1"
-          cidr_blocks = ["0.0.0.0/0"]
-        }
-      }
+      security_group_ids = [aws_security_group.asg_sg_ecs.id]
 
       load_balancer = {
         service = {

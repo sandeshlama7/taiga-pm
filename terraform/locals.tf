@@ -30,8 +30,6 @@ locals {
     create_lifecycle_policy = false
   }
 
-  ecr_repository_url = data.aws_ecr_repository.service.repository_url
-
 
   efs = {
     efs_name                           = module.naming.resources.efs.name
@@ -57,11 +55,44 @@ locals {
     front_load_balancing_cross_zone_enabled = true
   }
 
+  rds = {
+    identifier               = module.naming.resources.rds.name
+    engine                   = "postgres"
+    engine_version           = "14"
+    engine_lifecycle_support = "open-source-rds-extended-support-disabled"
+    family                   = "postgres14" # DB parameter group
+    major_engine_version     = "14"         # DB option group
+    instance_class           = "db.t3.micro"
+
+    allocated_storage     = 20
+    max_allocated_storage = 100
+    db_name               = "taiga_db"
+    username              = var.rds_username
+    port                  = 5432
+    multi_az              = var.rds_multi_az
+
+    deletion_protection    = var.rds_deletion_protection
+    create_db_subnet_group = true
+    db_subnet_group_name   = local.vpc.create_vpc != true ? var.database_subnet_group_name : module.vpc.database_subnet_group
+    skip_final_snapshot    = var.skip_final_snapshot
+
+    monitoring_interval                    = var.rds_monitoring_interval
+    monitoring_role_name                   = "${module.naming.resources.rds.name}-role"
+    create_monitoring_role                 = var.create_monitoring_role
+    parameter_group_name                   = "${module.naming.resources.rds.name}"
+    parameter_group_use_name_prefix        = var.parameter_group_use_name_prefix
+    iam_database_authentication_enabled    = false
+    enabled_cloudwatch_logs_exports        = ["postgresql", "upgrade"]
+    create_cloudwatch_log_group            = true
+    cloudwatch_log_group_retention_in_days = 365
+
+  }
+
   tags = {
-    Environment = var.env
-    Application = var.application
-    Project     = var.project
-    Owner       = var.owner
+    environment = var.env
+    application = var.application
+    project     = var.project
+    owner       = var.owner
   }
 
 }

@@ -22,3 +22,12 @@ ecr_force_delete = true
 ecr_scan_on_push = false
 
 alb_enable_deletion_protection = false
+
+rds_username                    = "taiga"
+rds_multi_az                    = true
+rds_deletion_protection         = false
+database_subnet_group_name      = "taiga_db_subnet_group"
+skip_final_snapshot             = true
+rds_monitoring_interval         = 0
+create_monitoring_role          = false
+parameter_group_use_name_prefix = false
