@@ -71,16 +71,16 @@ module "alb" {
   target_groups = {
 
     front_ecs = {
-      protocol                          = local.alb.frontend_protocol
+      protocol                          = local.alb.front_ecs_protocol
       port                              = local.ecs.container_port_1
-      target_type                       = local.alb.target_type
-      deregistration_delay              = 5
-      load_balancing_cross_zone_enabled = true
+      target_type                       = local.alb.front_ecs_target_type
+      deregistration_delay              = local.alb.front_ecs_deregistration_delay
+      load_balancing_cross_zone_enabled = local.alb.front_load_balancing_cross_zone_enabled
 
       health_check = {
         enabled = true
         # healthy_threshold   = 5
-        # interval            = 30
+        interval = 60
         # matcher             = "200"
         # path                = "/"
         # port                = "traffic-port"

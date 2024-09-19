@@ -45,14 +45,16 @@ locals {
   }
 
   alb = {
-    name                       = module.naming.resources.alb.name
-    load_balancer_type         = "application"
-    internal_load_balancer     = false
-    enable_deletion_protection = var.alb_enable_deletion_protection
-    frontend_protocol          = "HTTP"
-    listener_port              = 80
-    listener_protocol          = "HTTP"
-    target_type                = "ip"
+    name                                    = module.naming.resources.alb.name
+    load_balancer_type                      = "application"
+    internal_load_balancer                  = false
+    enable_deletion_protection              = var.alb_enable_deletion_protection
+    front_ecs_protocol                      = "HTTP"
+    listener_port                           = 80
+    listener_protocol                       = "HTTP"
+    front_ecs_target_type                   = "ip"
+    front_ecs_deregistration_delay          = 5
+    front_load_balancing_cross_zone_enabled = true
   }
 
   tags = {
