@@ -20,3 +20,5 @@ number_of_azs = 2
 
 ecr_force_delete = true
 ecr_scan_on_push = false
+
+alb_enable_deletion_protection = false

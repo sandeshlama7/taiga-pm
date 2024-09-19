@@ -20,10 +20,11 @@ module "ecs" {
   }
 
   services = {
-    nginx-service = {
+    taiga-frontend-service = {
 
-      cpu    = 1024
-      memory = 4096
+      cpu          = 1024
+      memory       = 4096
+      network_mode = "awsvpc"
 
       # Enables ECS Exec this helps in interacting with containers directly
       enable_execute_command = true
@@ -33,14 +34,14 @@ module "ecs" {
       # Container definition(s)
       container_definitions = {
 
-        nginx = {
+        (local.ecs.container_name_1) = {
           essential = true
-          image     = "${local.ecr_repository_url}:latest"
+          image     = "${local.ecr_repository_url}:front-latest"
           port_mappings = [
             {
-              name          = local.ecs.nginx_container_name
-              containerPort = local.ecs.nginx_container_port
-              hostPort      = local.ecs.nginx_host_port
+              name          = local.ecs.container_name_1
+              containerPort = local.ecs.container_port_1
+              hostPort      = local.ecs.host_port
               protocol      = "tcp"
             }
           ]
@@ -53,7 +54,7 @@ module "ecs" {
         alb_ingress_80 = {
           type        = "ingress"
           from_port   = local.ecs.container_port
-          to_port     = local.ecs.container_port
+          to_port     = local.ecs.container_port_1
           protocol    = "tcp"
           description = "Service port"
           # source_security_group_id = module.alb.security_group_id
@@ -65,6 +66,14 @@ module "ecs" {
           to_port     = 0
           protocol    = "-1"
           cidr_blocks = ["0.0.0.0/0"]
+        }
+      }
+
+      load_balancer = {
+        service = {
+          target_group_arn = module.alb.target_groups["front_ecs"].arn
+          container_name   = local.ecs.container_name_1
+          container_port   = local.ecs.container_port_1
         }
       }
     }

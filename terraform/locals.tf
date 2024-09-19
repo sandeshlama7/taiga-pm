@@ -14,10 +14,10 @@ locals {
   ecs = {
     ecs_cluster_name = module.naming.resources.ecs-cluster.name
 
-    nginx_container_name = "nginx"
-    nginx_container_port = 80
-    nginx_host_port      = 80
-    container_port       = 80
+    container_name_1 = "frontend"
+    container_port_1 = 80
+    host_port        = 80
+    container_port   = 80
   }
 
   ecr = {
@@ -42,6 +42,17 @@ locals {
     security_group_description         = "EFS security group"
     security_group_cidr_block          = local.vpc_cidr
     efs_backup_policy                  = true
+  }
+
+  alb = {
+    name                       = module.naming.resources.alb.name
+    load_balancer_type         = "application"
+    internal_load_balancer     = false
+    enable_deletion_protection = var.alb_enable_deletion_protection
+    frontend_protocol          = "HTTP"
+    listener_port              = 80
+    listener_protocol          = "HTTP"
+    target_type                = "ip"
   }
 
   tags = {

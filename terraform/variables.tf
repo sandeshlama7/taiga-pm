@@ -85,3 +85,12 @@ variable "ecr_scan_on_push" {
   type        = bool
   default     = true
 }
+
+#################################################################################
+# variables for ALB
+#################################################################################
+variable "alb_enable_deletion_protection" {
+  description = "alb_enable_deletion_protection"
+  type        = bool
+  default     = true
+}
