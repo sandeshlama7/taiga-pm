@@ -6,6 +6,7 @@ locals {
     create_vpc = var.vpc_id != "" && length(var.public_subnet_ids) != 0 && length(var.private_subnet_ids) != 0 ? false : true
   }
 
+  region             = var.region
   vpc_id             = local.vpc.create_vpc != true ? var.vpc_id : module.vpc.vpc_id
   vpc_cidr           = local.vpc.create_vpc != true ? var.vpc_cidr : module.vpc.vpc_cidr_block
   public_subnet_ids  = local.vpc.create_vpc != true ? var.public_subnet_ids : module.vpc.public_subnets
@@ -14,10 +15,24 @@ locals {
   ecs = {
     ecs_cluster_name = module.naming.resources.ecs-cluster.name
 
-    container_name_1 = "frontend"
-    container_port_1 = 80
     host_port        = 80
     container_port   = 80
+    container_name_1 = "frontend"
+    container_port_1 = 80
+    host_port_1      = 80
+    container_name_2 = "backend"
+    container_port_2 = 8000
+    host_port_2      = 8000
+    container_name_3 = "protected"
+    container_port_3 = 8003
+    host_port_3      = 8003
+    container_name_4 = "events"
+    container_port_4 = 8888
+    host_port_4      = 8888
+    container_name_5 = "rabbitmq"
+    container_port_5 = 5672
+    host_port_5      = 5672
+
   }
 
   ecr = {
@@ -30,6 +45,10 @@ locals {
     create_lifecycle_policy = false
   }
 
+  ecr_repo       = split("/", "${module.ecr.repository_url}")[0]
+  aws_account_id = data.aws_caller_identity.current.account_id
+  # ecr_repository_url = data.aws_ecr_repository.service.repository_url
+  ecr_repository_url = "${local.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/${local.ecr.ecr_name}"
 
   efs = {
     efs_name                           = module.naming.resources.efs.name
@@ -43,16 +62,16 @@ locals {
   }
 
   alb = {
-    name                                    = module.naming.resources.alb.name
-    load_balancer_type                      = "application"
-    internal_load_balancer                  = false
-    enable_deletion_protection              = var.alb_enable_deletion_protection
-    front_ecs_protocol                      = "HTTP"
-    listener_port                           = 80
-    listener_protocol                       = "HTTP"
-    front_ecs_target_type                   = "ip"
-    front_ecs_deregistration_delay          = 5
-    front_load_balancing_cross_zone_enabled = true
+    name                              = module.naming.resources.alb.name
+    load_balancer_type                = "application"
+    internal_load_balancer            = false
+    enable_deletion_protection        = var.alb_enable_deletion_protection
+    ecs_protocol                      = "HTTP"
+    listener_port                     = 80
+    listener_protocol                 = "HTTP"
+    ecs_target_type                   = "ip"
+    ecs_deregistration_delay          = 5
+    load_balancing_cross_zone_enabled = true
   }
 
   rds = {
