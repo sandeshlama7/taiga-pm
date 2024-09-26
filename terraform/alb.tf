@@ -70,7 +70,7 @@ module "alb" {
           }]
           conditions = [{
             path_pattern = {
-              values = ["/media/*", "/media/exports/*"]
+              values = ["/media/exports/*", "/media/*"]
             }
           }]
         },
@@ -111,31 +111,33 @@ module "alb" {
 
       health_check = {
         enabled             = true
-        healthy_threshold   = 5
-        interval            = 30
+        healthy_threshold   = 2
+        interval            = 11
         matcher             = "200-499"
         path                = "/"
         port                = "traffic-port"
         protocol            = "HTTP"
-        timeout             = 5
+        timeout             = 10
         unhealthy_threshold = 2
       }
       create_attachment = false
     }
 
     back_ecs_api_admin = {
-      protocol    = local.alb.ecs_protocol
-      port        = 8000
-      target_type = local.alb.ecs_target_type
+      protocol                          = local.alb.ecs_protocol
+      port                              = 8000
+      target_type                       = local.alb.ecs_target_type
+      deregistration_delay              = local.alb.ecs_deregistration_delay
+      load_balancing_cross_zone_enabled = local.alb.load_balancing_cross_zone_enabled
       health_check = {
         enabled             = true
-        healthy_threshold   = 5
-        interval            = 30
+        healthy_threshold   = 2
+        interval            = 31
         matcher             = "200-499"
         path                = "/"
         port                = "traffic-port"
         protocol            = "HTTP"
-        timeout             = 5
+        timeout             = 30
         unhealthy_threshold = 2
       }
       create_attachment = false
@@ -145,33 +147,37 @@ module "alb" {
     #   protocol    = local.alb.ecs_protocol
     #   port        = 8000
     #   target_type = local.alb.ecs_target_type
+    #   deregistration_delay              = local.alb.ecs_deregistration_delay
+    #   load_balancing_cross_zone_enabled = local.alb.load_balancing_cross_zone_enabled
     #   health_check = {
     #     enabled = true
-    #     healthy_threshold   = 5
-    #     interval = 30
+    #     healthy_thres1old   = 5
+    #     interval = 31
     #     matcher             = "200-499"
     #     path                = "/"
     #     port                = "traffic-port"
     #     protocol            = "HTTP"
-    #     timeout             = 5
+    #     timeout             = 30
     #     unhealthy_threshold = 2
     #   }
     #   create_attachment = false
     # }
 
     media_ecs_protected_unprotected = {
-      protocol    = local.alb.ecs_protocol
-      port        = 8003
-      target_type = local.alb.ecs_target_type
+      protocol                          = local.alb.ecs_protocol
+      port                              = 8003
+      target_type                       = local.alb.ecs_target_type
+      deregistration_delay              = local.alb.ecs_deregistration_delay
+      load_balancing_cross_zone_enabled = local.alb.load_balancing_cross_zone_enabled
       health_check = {
         enabled             = true
-        healthy_threshold   = 5
-        interval            = 30
+        healthy_threshold   = 2
+        interval            = 31
         matcher             = "200-499"
         path                = "/"
         port                = "traffic-port"
         protocol            = "HTTP"
-        timeout             = 5
+        timeout             = 30
         unhealthy_threshold = 2
       }
       create_attachment = false
@@ -181,33 +187,37 @@ module "alb" {
     #   protocol    = local.alb.ecs_protocol
     #   port        = 8003
     #   target_type = local.alb.ecs_target_type
+    #   deregistration_delay              = local.alb.ecs_deregistration_delay
+    #   load_balancing_cross_zone_enabled = local.alb.load_balancing_cross_zone_enabled
     #   health_check = {
     #     enabled = true
-    #     healthy_threshold   = 5
-    #     interval = 30
+    #     healthy_thres1old   = 5
+    #     interval = 31
     #     matcher             = "200-499"
     #     path                = "/"
     #     port                = "traffic-port"
     #     protocol            = "HTTP"
-    #     timeout             = 5
+    #     timeout             = 30
     #     unhealthy_threshold = 2
     #   }
     #   create_attachment = false
     # }
 
     events_ecs = {
-      protocol    = local.alb.ecs_protocol
-      port        = 8888
-      target_type = local.alb.ecs_target_type
+      protocol                          = local.alb.ecs_protocol
+      port                              = 8888
+      target_type                       = local.alb.ecs_target_type
+      deregistration_delay              = local.alb.ecs_deregistration_delay
+      load_balancing_cross_zone_enabled = local.alb.load_balancing_cross_zone_enabled
       health_check = {
         enabled             = true
-        healthy_threshold   = 5
-        interval            = 30
+        healthy_threshold   = 2
+        interval            = 31
         matcher             = "200-499"
-        path                = "/"
+        path                = "/events"
         port                = "traffic-port"
         protocol            = "HTTP"
-        timeout             = 5
+        timeout             = 30
         unhealthy_threshold = 2
       }
       create_attachment = false

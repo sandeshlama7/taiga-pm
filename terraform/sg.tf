@@ -43,6 +43,27 @@ resource "aws_security_group" "asg_sg_ecs" {
     security_groups = [aws_security_group.alb_sg.id]
   }
 
+  ingress {
+    from_port       = 8000
+    to_port         = 8000
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
+  }
+
+  ingress {
+    from_port       = 8003
+    to_port         = 8003
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
+  }
+
+  ingress {
+    from_port       = 8888
+    to_port         = 8888
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
+  }
+
   # HTTPS rule
   ingress {
     from_port       = 443

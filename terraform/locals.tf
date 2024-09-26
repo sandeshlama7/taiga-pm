@@ -15,23 +15,25 @@ locals {
   ecs = {
     ecs_cluster_name = module.naming.resources.ecs-cluster.name
 
-    host_port        = 80
-    container_port   = 80
-    container_name_1 = "frontend"
-    container_port_1 = 80
-    host_port_1      = 80
-    container_name_2 = "backend"
-    container_port_2 = 8000
-    host_port_2      = 8000
-    container_name_3 = "protected"
-    container_port_3 = 8003
-    host_port_3      = 8003
-    container_name_4 = "events"
-    container_port_4 = 8888
-    host_port_4      = 8888
-    container_name_5 = "rabbitmq"
-    container_port_5 = 5672
-    host_port_5      = 5672
+    host_port                        = 80
+    container_port                   = 80
+    container_name_1                 = "frontend"
+    container_port_1                 = 80
+    host_port_1                      = 80
+    container_name_2                 = "backend"
+    container_port_2                 = 8000
+    host_port_2                      = 8000
+    container_name_3                 = "protected"
+    container_port_3                 = 8003
+    host_port_3                      = 8003
+    container_name_4                 = "events"
+    container_port_4                 = 8888
+    host_port_4                      = 8888
+    container_name_5                 = "rabbitmq"
+    container_5_discovery_name       = "taiga-events-rabbitmq"
+    container_port_5                 = 5672
+    host_port_5                      = 5672
+    service_discovery_namespace_name = "taiga-service-namespace-rabbitmq"
 
   }
 
