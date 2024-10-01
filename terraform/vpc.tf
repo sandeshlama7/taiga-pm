@@ -26,6 +26,10 @@ module "vpc" {
   single_nat_gateway     = true
   one_nat_gateway_per_az = false
 
+  enable_dhcp_options  = true
+  enable_dns_support   = true
+  enable_dns_hostnames = true
+
   manage_default_security_group = false
   manage_default_network_acl    = false
   manage_default_route_table    = false

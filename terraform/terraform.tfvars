@@ -31,3 +31,7 @@ skip_final_snapshot             = true
 rds_monitoring_interval         = 0
 create_monitoring_role          = false
 parameter_group_use_name_prefix = false
+
+zone_name = "sandbox.adex.ltd"
+
+secret_test = "123"

@@ -10,12 +10,14 @@ module "rds" {
   major_engine_version     = local.rds.major_engine_version # DB option group
   instance_class           = local.rds.instance_class
 
-  allocated_storage     = local.rds.allocated_storage
-  max_allocated_storage = local.rds.max_allocated_storage
-  db_name               = local.rds.db_name
-  username              = local.rds.username
-  port                  = local.rds.port
-  multi_az              = local.rds.multi_az
+  allocated_storage           = local.rds.allocated_storage
+  max_allocated_storage       = local.rds.max_allocated_storage
+  db_name                     = local.rds.db_name
+  username                    = local.rds.username
+  manage_master_user_password = local.rds.manage_master_user_password
+  password                    = local.rds.password
+  port                        = local.rds.port
+  multi_az                    = local.rds.multi_az
 
   subnet_ids             = local.private_subnet_ids
   vpc_security_group_ids = [aws_security_group.database.id]

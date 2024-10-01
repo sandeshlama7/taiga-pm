@@ -15,27 +15,62 @@ locals {
   ecs = {
     ecs_cluster_name = module.naming.resources.ecs-cluster.name
 
-    host_port                        = 80
-    container_port                   = 80
-    container_name_1                 = "frontend"
-    container_port_1                 = 80
-    host_port_1                      = 80
-    container_name_2                 = "backend"
-    container_port_2                 = 8000
-    host_port_2                      = 8000
-    container_name_3                 = "protected"
-    container_port_3                 = 8003
-    host_port_3                      = 8003
-    container_name_4                 = "events"
-    container_port_4                 = 8888
-    host_port_4                      = 8888
-    container_name_5                 = "rabbitmq"
-    container_5_discovery_name       = "taiga-events-rabbitmq"
-    container_port_5                 = 5672
-    host_port_5                      = 5672
-    service_discovery_namespace_name = "taiga-service-namespace-rabbitmq"
+    host_port                                    = 80
+    container_port                               = 80
+    container_name_1                             = "taiga-front"
+    container_port_1                             = 80
+    host_port_1                                  = 80
+    container_name_2                             = "taiga-back"
+    container_2_discovery_name                   = "taiga-back"
+    container_port_2                             = 8000
+    host_port_2                                  = 8000
+    container_name_3                             = "taiga-protected"
+    container_port_3                             = 8003
+    host_port_3                                  = 8003
+    container_name_4                             = "taiga-events"
+    container_port_4                             = 8888
+    host_port_4                                  = 8888
+    container_name_5                             = "taiga-events-rabbitmq"
+    container_5_discovery_name                   = "taiga-events-rabbitmq"
+    container_port_5                             = 5672
+    host_port_5                                  = 5672
+    container_name_6                             = "taiga-async-rabbitmq"
+    container_6_discovery_name                   = "taiga-async-rabbitmq"
+    container_port_6                             = 5672
+    host_port_6                                  = 5672
+    container_name_7                             = "taiga-async"
+    container_port_7                             = 8000
+    host_port_7                                  = 8000
+    service_discovery_http_namespace_name        = "taiga-http-namespace-rabbitmq"
+    service_discovery_private_dns_namespace_name = "taiga-pri-dns-namespace-rabbitmq"
 
+    # postgres_host      = module.rds.db_instance_endpoint
+    postgres_user      = "taiga"
+    postgre_db         = "taiga_db"
+    taiga_sites_scheme = "http"
+    # taiga_sites_domain      = module.route53.route53_record_name
+    taiga_subpath           = ""
+    email_backend           = "django.core.mail.backends.console.EmailBackend"
+    default_from_email      = "changeme@example.com"
+    email_use_tls           = "True"
+    email_use_ssl           = "False"
+    email_host              = "smtp.host.example.com"
+    email_port              = "587"
+    email_host_user         = "user"
+    rabbitmq_user           = "taiga"
+    enable_telemetry        = "True"
+    public_register_enabled = "True"
+    rabbitmq_default_user   = "taiga"
+    rabbitmq_default_vhost  = "taiga"
+    # taiga_secret_key        = "${module.sm.secret_arn}:TAIGA_SECRET_KEY::"
   }
+
+  # taiga_url           = "http://${local.ecs.taiga_sites_domain}"
+  # taiga_websocket_url = "ws://${local.ecs.taiga_sites_domain}"
+
+  taiga_sites_domain  = "taiga.sandbox.adex.ltd"
+  taiga_url           = "http://taiga.sandbox.adex.ltd"
+  taiga_websocket_url = "ws://taiga.sandbox.adex.ltd"
 
   ecr = {
     ecr_name                = module.naming.resources.ecr.name
@@ -85,12 +120,14 @@ locals {
     major_engine_version     = "14"         # DB option group
     instance_class           = "db.t3.micro"
 
-    allocated_storage     = 20
-    max_allocated_storage = 100
-    db_name               = "taiga_db"
-    username              = var.rds_username
-    port                  = 5432
-    multi_az              = var.rds_multi_az
+    allocated_storage           = 20
+    max_allocated_storage       = 100
+    db_name                     = "taiga_db"
+    username                    = var.rds_username
+    manage_master_user_password = false
+    password                    = "${module.sm.secret_arn}:POSTGRES_PASSWORD::"
+    port                        = 5432
+    multi_az                    = var.rds_multi_az
 
     deletion_protection    = var.rds_deletion_protection
     create_db_subnet_group = true
@@ -107,6 +144,28 @@ locals {
     create_cloudwatch_log_group            = true
     cloudwatch_log_group_retention_in_days = 365
 
+  }
+
+  sm = {
+    name                    = module.naming.resources.prefix.name
+    description             = "Secret manager for storing credentials"
+    create                  = true
+    enable_rotation         = false
+    ignore_secret_changes   = true
+    recovery_window_in_days = 0
+  }
+
+  random_password = {
+    password_length     = 20
+    exclude_punctuation = true
+    include_space       = false
+    special             = true
+    override_special    = "_.-"
+  }
+
+  route53 = {
+    zone_name = var.zone_name
+    record    = "taiga"
   }
 
   tags = {
