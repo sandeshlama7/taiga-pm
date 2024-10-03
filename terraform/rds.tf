@@ -38,5 +38,12 @@ module "rds" {
   create_cloudwatch_log_group            = local.rds.create_cloudwatch_log_group
   cloudwatch_log_group_retention_in_days = local.rds.cloudwatch_log_group_retention_in_days
 
+  # parameters = [
+  #   {
+  #     name  = "rds.force_ssl"
+  #     value = 0
+  #   }
+  # ]
+
   tags = local.tags
 }

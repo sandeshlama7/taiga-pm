@@ -11,13 +11,13 @@ module "sm" {
   create_random_password  = false
 
   secret_string = jsonencode({
-    POSTGRES_HOST          = module.rds.db_instance_endpoint #local.ecs.postgres_host
+    POSTGRES_HOST          = split(":", module.rds.db_instance_endpoint)[0] # local.ecs.postgres_host
     POSTGRES_PASSWORD      = random_password.db_password.result
     TAIGA_SECRET_KEY       = random_password.taiga_secret.result
     RABBITMQ_PASS          = random_password.rabbitmq_password.result
     EMAIL_HOST_PASSWORD    = random_password.email_host_password.result
     RABBITMQ_ERLANG_COOKIE = random_password.rabbitmq_erlang_cookie.result
-    RABBITMQ_DEFAULT_PASS  = random_password.rabbitmq_default_pass.result
+    # RABBITMQ_DEFAULT_PASS  = random_password.rabbitmq_default_pass.result
     # POSTGRES_PASSWORD      = data.aws_secretsmanager_random_password.db_password.random_password
     # TAIGA_SECRET_KEY       = data.aws_secretsmanager_random_password.taiga_secret.random_password
     # RABBITMQ_PASS          = data.aws_secretsmanager_random_password.rabbitmq_password.random_password

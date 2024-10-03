@@ -22,6 +22,13 @@
 | <a name="module_alb"></a> [alb](#module\_alb) | terraform-aws-modules/alb/aws | 9.11.0 |
 | <a name="module_ecr"></a> [ecr](#module\_ecr) | terraform-aws-modules/ecr/aws | 2.3.0 |
 | <a name="module_ecs"></a> [ecs](#module\_ecs) | terraform-aws-modules/ecs/aws | 5.11.4 |
+| <a name="module_ecs_service_taiga_async"></a> [ecs\_service\_taiga\_async](#module\_ecs\_service\_taiga\_async) | terraform-aws-modules/ecs/aws//modules/service | 5.11.2 |
+| <a name="module_ecs_service_taiga_async_rabbitmq"></a> [ecs\_service\_taiga\_async\_rabbitmq](#module\_ecs\_service\_taiga\_async\_rabbitmq) | terraform-aws-modules/ecs/aws//modules/service | 5.11.2 |
+| <a name="module_ecs_service_taiga_back"></a> [ecs\_service\_taiga\_back](#module\_ecs\_service\_taiga\_back) | terraform-aws-modules/ecs/aws//modules/service | 5.11.2 |
+| <a name="module_ecs_service_taiga_events"></a> [ecs\_service\_taiga\_events](#module\_ecs\_service\_taiga\_events) | terraform-aws-modules/ecs/aws//modules/service | 5.11.2 |
+| <a name="module_ecs_service_taiga_events_rabbitmq"></a> [ecs\_service\_taiga\_events\_rabbitmq](#module\_ecs\_service\_taiga\_events\_rabbitmq) | terraform-aws-modules/ecs/aws//modules/service | 5.11.2 |
+| <a name="module_ecs_service_taiga_front"></a> [ecs\_service\_taiga\_front](#module\_ecs\_service\_taiga\_front) | terraform-aws-modules/ecs/aws//modules/service | 5.11.2 |
+| <a name="module_ecs_service_taiga_protected"></a> [ecs\_service\_taiga\_protected](#module\_ecs\_service\_taiga\_protected) | terraform-aws-modules/ecs/aws//modules/service | 5.11.2 |
 | <a name="module_efs"></a> [efs](#module\_efs) | terraform-aws-modules/efs/aws | 1.6.3 |
 | <a name="module_naming"></a> [naming](#module\_naming) | git@github.com:adexltd/terraform-naming-convention-module.git | n/a |
 | <a name="module_rds"></a> [rds](#module\_rds) | terraform-aws-modules/rds/aws | 6.9.0 |

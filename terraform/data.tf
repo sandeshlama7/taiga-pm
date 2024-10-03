@@ -10,6 +10,9 @@ data "aws_availability_zones" "available" {}
 data "aws_caller_identity" "current" {}
 
 # data "aws_secretsmanager_secret" "taiga_secret" {
-#   depends_on = [module.sm]
-#   name       = local.sm.name
+#   arn = module.sm.secret_arn
+# }
+
+# data "aws_secretsmanager_secret_version" "secret_version" {
+#   secret_id = data.aws_secretsmanager_secret.taiga_secret.id
 # }

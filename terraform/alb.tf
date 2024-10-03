@@ -112,7 +112,7 @@ module "alb" {
       health_check = {
         enabled             = true
         healthy_threshold   = 2
-        interval            = 11
+        interval            = 120
         matcher             = "200-499"
         path                = "/"
         port                = "traffic-port"
@@ -132,7 +132,7 @@ module "alb" {
       health_check = {
         enabled             = true
         healthy_threshold   = 2
-        interval            = 31
+        interval            = 120
         matcher             = "200-499"
         path                = "/"
         port                = "traffic-port"
@@ -152,7 +152,7 @@ module "alb" {
     #   health_check = {
     #     enabled = true
     #     healthy_thres1old   = 5
-    #     interval = 31
+    #     interval = 120
     #     matcher             = "200-499"
     #     path                = "/"
     #     port                = "traffic-port"
@@ -172,7 +172,7 @@ module "alb" {
       health_check = {
         enabled             = true
         healthy_threshold   = 2
-        interval            = 31
+        interval            = 120
         matcher             = "200-499"
         path                = "/"
         port                = "traffic-port"
@@ -192,7 +192,7 @@ module "alb" {
     #   health_check = {
     #     enabled = true
     #     healthy_thres1old   = 5
-    #     interval = 31
+    #     interval = 120
     #     matcher             = "200-499"
     #     path                = "/"
     #     port                = "traffic-port"
@@ -212,7 +212,7 @@ module "alb" {
       health_check = {
         enabled             = true
         healthy_threshold   = 2
-        interval            = 31
+        interval            = 120
         matcher             = "200-499"
         path                = "/events"
         port                = "traffic-port"
