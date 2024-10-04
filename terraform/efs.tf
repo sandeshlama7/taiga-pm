@@ -3,8 +3,8 @@ module "efs" {
   version = "1.6.3"
 
   # File system
-  name           = local.efs.efs_name
-  creation_token = local.efs.efs_name
+  name           = local.efs.name
+  creation_token = local.efs.name
   encrypted      = local.efs.encrypted
 
   performance_mode = "generalPurpose"
@@ -24,8 +24,8 @@ module "efs" {
       sid = "Acess EFS by ECS cluster"
       actions = [
         "elasticfilesystem:ClientMount",
-        "elasticfilesystem:ClientWrite",
-        "elasticfilesystem:ClientRootAccess"
+        "elasticfilesystem:ClientWrite"
+        # "elasticfilesystem:ClientRootAccess"
       ]
       principals = [
         {
@@ -64,12 +64,61 @@ module "efs" {
       root_directory = {
         path = "/rabbitmq"
         creation_info = {
+          owner_gid   = 1000
+          owner_uid   = 1000
+          permissions = "750"
+        }
+      }
+    }
+
+    taiga-static-data = {
+      name = "taiga-static-data"
+      root_directory = {
+        path = "/taiga-static-data"
+        creation_info = {
           owner_gid   = 1001
           owner_uid   = 1001
           permissions = "750"
         }
       }
     }
+
+    taiga-media-data = {
+      name = "taiga-media-data"
+      root_directory = {
+        path = "/taiga-media-data"
+        creation_info = {
+          owner_gid   = 1002
+          owner_uid   = 1002
+          permissions = "750"
+        }
+      }
+    }
+
+    taiga-async-rabbitmq-data = {
+      name = "taiga-async-rabbitmq-data"
+      root_directory = {
+        path = "/taiga-async-rabbitmq-data"
+        creation_info = {
+          owner_gid   = 1003
+          owner_uid   = 1003
+          permissions = "750"
+        }
+      }
+    }
+
+    taiga-events-rabbitmq-data = {
+      name = "taiga-events-rabbitmq-data"
+      root_directory = {
+        path = "/taiga-events-rabbitmq-data"
+        creation_info = {
+          owner_gid   = 1004
+          owner_uid   = 1004
+          permissions = "750"
+        }
+      }
+    }
+
   }
 
 

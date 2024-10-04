@@ -15,3 +15,29 @@ module "ecr" {
   tags = local.tags
 
 }
+
+resource "null_resource" "push_to_ecr_with_tag" {
+  depends_on = [module.ecr]
+
+  triggers = {
+    always_run = "${timestamp()}" # Forces it to rerun each time
+  }
+  provisioner "local-exec" {
+    command = <<EOT
+    aws ecr get-login-password --region ${local.region} | docker login --username AWS --password-stdin ${local.ecr_repo}
+    docker tag taigaio/taiga-front:latest ${module.ecr.repository_url}:front-latest
+    docker tag taigaio/taiga-back:latest ${module.ecr.repository_url}:back-latest
+    docker tag taigaio/taiga-protected:latest ${module.ecr.repository_url}:protected-latest
+    docker tag taigaio/taiga-events:latest ${module.ecr.repository_url}:events-latest
+    docker tag rabbitmq:3.8-management-alpine ${module.ecr.repository_url}:rabbitmq-latest
+    
+    docker push ${module.ecr.repository_url}:front-latest &
+    docker push ${module.ecr.repository_url}:back-latest &
+    docker push ${module.ecr.repository_url}:protected-latest &
+    docker push ${module.ecr.repository_url}:events-latest &
+    docker push ${module.ecr.repository_url}:rabbitmq-latest &
+    wait
+
+    EOT
+  }
+}
