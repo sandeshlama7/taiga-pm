@@ -121,7 +121,7 @@ locals {
   ecr_repository_url = "${local.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/${local.ecr.ecr_name}"
 
   efs = {
-    efs_name                           = module.naming.resources.efs.name
+    name                               = module.naming.resources.efs.name
     encrypted                          = true
     attach_policy                      = true
     bypass_policy_lockout_safety_check = false

@@ -127,8 +127,47 @@ module "ecs_service_taiga_async" {
           valueFrom = "${module.sm.secret_arn}:RABBITMQ_PASS::"
         }
       ]
+
+      mount_points = [
+        {
+          sourceVolume  = "taiga-static-data"
+          containerPath = "/taiga-back/static" #Path where EFS will be mounted inside the container
+          readOnly      = false
+        },
+        {
+          sourceVolume  = "taiga-media-data"
+          containerPath = "/taiga-back/media" #Path where EFS will be mounted inside the container
+          readOnly      = false
+        }
+      ]
     }
   }
+
+  volume = {
+    ("taiga-static-data") = {
+      efs_volume_configuration = {
+        file_system_id = module.efs.id
+        # root_directory     = "/" # This argument is ignored when using authorization_config
+        transit_encryption = "ENABLED"
+        authorization_config = {
+          access_point_id = module.efs.access_points.taiga-static-data.id
+          iam             = "ENABLED"
+        }
+      }
+    }
+    ("taiga-media-data") = {
+      efs_volume_configuration = {
+        file_system_id = module.efs.id
+        # root_directory     = "/" # This argument is ignored when using authorization_config
+        transit_encryption = "ENABLED"
+        authorization_config = {
+          access_point_id = module.efs.access_points.taiga-media-data.id
+          iam             = "ENABLED"
+        }
+      }
+    }
+  }
+
 
   service_connect_configuration = {
     namespace = aws_service_discovery_http_namespace.this.arn

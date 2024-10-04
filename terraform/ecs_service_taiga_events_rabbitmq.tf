@@ -56,6 +56,27 @@ module "ecs_service_taiga_events_rabbitmq" {
           valueFrom = "${module.sm.secret_arn}:RABBITMQ_PASS::"
         }
       ]
+      mount_points = [
+        {
+          sourceVolume  = "taiga-events-rabbitmq"
+          containerPath = "/var/lib/rabbitmq" #Path where EFS will be mounted inside the container
+          readOnly      = false
+        }
+      ]
+    }
+  }
+
+  volume = {
+    ("taiga-events-rabbitmq") = {
+      efs_volume_configuration = {
+        file_system_id = module.efs.id
+        # root_directory     = "/" # This argument is ignored when using authorization_config
+        transit_encryption = "ENABLED"
+        authorization_config = {
+          access_point_id = module.efs.access_points.taiga-events-rabbitmq-data.id
+          iam             = "ENABLED"
+        }
+      }
     }
   }
 
