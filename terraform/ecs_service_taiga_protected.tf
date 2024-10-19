@@ -13,6 +13,8 @@ module "ecs_service_taiga_protected" {
   # Enables ECS Exec this helps in interacting with containers directly
   enable_execute_command = true
 
+  wait_for_steady_state = true
+
   subnet_ids            = local.private_subnet_ids
   create_security_group = false
   security_group_ids    = [aws_security_group.asg_sg_ecs.id]
@@ -65,11 +67,11 @@ module "ecs_service_taiga_protected" {
     }
   }
 
-  load_balancer = {
-    service_4 = {
-      target_group_arn = module.alb.target_groups["media_ecs_protected_unprotected"].arn
-      container_name   = local.ecs.container_name_3
-      container_port   = local.ecs.container_port_3
-    }
-  }
+  # load_balancer = {
+  #   service_4 = {
+  #     target_group_arn = module.alb.target_groups["media_ecs_protected"].arn
+  #     container_name   = local.ecs.container_name_3
+  #     container_port   = local.ecs.container_port_3
+  #   }
+  # }
 }

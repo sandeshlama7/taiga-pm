@@ -45,22 +45,26 @@ locals {
     container_7_discovery_name                   = "taiga-async"
     container_port_7                             = 8000
     host_port_7                                  = 8000
+    container_name_8                             = "taiga-nginx"
+    container_8_discovery_name                   = "taiga-nginx"
+    container_port_8                             = 80
+    host_port_8                                  = 9000
     service_discovery_http_namespace_name        = "taiga-http-namespace-rabbitmq"
     service_discovery_private_dns_namespace_name = "taiga-pri-dns-namespace-rabbitmq"
 
     # postgres_host      = split(":", module.rds.db_instance_endpoint)[0]
     postgres_user      = "taiga"
     postgre_db         = "taiga_db"
-    taiga_sites_scheme = "http"
+    taiga_sites_scheme = "https"
     # taiga_sites_domain      = module.route53.route53_record_name
     taiga_subpath                 = ""
-    email_backend                 = "django.core.mail.backends.console.EmailBackend"
-    default_from_email            = "changeme@example.com"
+    email_backend                 = "django.core.mail.backends.smtp.EmailBackend"
+    default_from_email            = "sigdelsameep@gmail.com" //"sameep.sigdel@adex.ltd"
     email_use_tls                 = "True"
     email_use_ssl                 = "False"
-    email_host                    = "smtp.host.example.com"
+    email_host                    = "email-smtp.us-east-1.amazonaws.com"
     email_port                    = "587"
-    email_host_user               = "user"
+    email_host_user               = aws_iam_access_key.test.id //module.ses-clouddrove.iam_access_key_id
     rabbitmq_user                 = "taiga"
     enable_telemetry              = "True"
     public_register_enabled       = "True"
@@ -74,8 +78,8 @@ locals {
   # taiga_websocket_url = "ws://${local.ecs.taiga_sites_domain}"
 
   taiga_sites_domain  = "taiga.sandbox.adex.ltd"
-  taiga_url           = "http://taiga.sandbox.adex.ltd"
-  taiga_websocket_url = "ws://taiga.sandbox.adex.ltd"
+  taiga_url           = "https://taiga.sandbox.adex.ltd"
+  taiga_websocket_url = "wss://taiga.sandbox.adex.ltd"
 
   ecs_service_taiga_async_rabbitmq = {
     name = "taiga-async-rabbitmq"
@@ -103,6 +107,10 @@ locals {
 
   ecs_service_taiga_protected = {
     name = "taiga-protected"
+  }
+
+  ecs_service_taiga_nginx = {
+    name = "taiga-nginx"
   }
 
   ecr = {
@@ -199,6 +207,10 @@ locals {
   route53 = {
     zone_name = var.zone_name
     record    = "taiga"
+  }
+
+  acm = {
+    validation_method = "DNS"
   }
 
   tags = {

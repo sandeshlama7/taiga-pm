@@ -15,7 +15,7 @@ module "sm" {
     POSTGRES_PASSWORD      = random_password.db_password.result
     TAIGA_SECRET_KEY       = random_password.taiga_secret.result
     RABBITMQ_PASS          = random_password.rabbitmq_password.result
-    EMAIL_HOST_PASSWORD    = random_password.email_host_password.result
+    EMAIL_HOST_PASSWORD    = aws_iam_access_key.test.ses_smtp_password_v4 //random_password.email_host_password.result
     RABBITMQ_ERLANG_COOKIE = random_password.rabbitmq_erlang_cookie.result
     # RABBITMQ_DEFAULT_PASS  = random_password.rabbitmq_default_pass.result
     # POSTGRES_PASSWORD      = data.aws_secretsmanager_random_password.db_password.random_password

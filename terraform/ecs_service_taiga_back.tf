@@ -13,6 +13,8 @@ module "ecs_service_taiga_back" {
   # Enables ECS Exec this helps in interacting with containers directly
   enable_execute_command = true
 
+  wait_for_steady_state = true
+
   subnet_ids            = local.private_subnet_ids
   create_security_group = false
   security_group_ids    = [aws_security_group.asg_sg_ecs.id]

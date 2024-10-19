@@ -16,3 +16,8 @@ data "aws_caller_identity" "current" {}
 # data "aws_secretsmanager_secret_version" "secret_version" {
 #   secret_id = data.aws_secretsmanager_secret.taiga_secret.id
 # }
+
+data "aws_route53_zone" "route53_zone" {
+  name         = "sandbox.adex.ltd"
+  private_zone = false
+}
