@@ -45,7 +45,6 @@ module "ecs_service_taiga_protected" {
         {
           name      = "SECRET_KEY"
           valueFrom = "${module.sm.secret_arn}:TAIGA_SECRET_KEY::"
-          # valueFrom = var.secret_test
           # valueFrom = random_password.taiga_secret.result
           # valueFrom = "secret password"
           # valueFrom = local.ecs.taiga_secret_key

@@ -150,8 +150,3 @@ variable "zone_name" {
   description = "Zone name"
   type        = string
 }
-
-variable "secret_test" {
-  description = "Secret test"
-  type        = string
-}

@@ -82,7 +82,6 @@
 | <a name="input_rds_multi_az"></a> [rds\_multi\_az](#input\_rds\_multi\_az) | Create RDS multi az | `bool` | `true` | no |
 | <a name="input_rds_username"></a> [rds\_username](#input\_rds\_username) | Username of RDS | `string` | `null` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS region | `string` | `"us-east-1"` | no |
-| <a name="input_secret_test"></a> [secret\_test](#input\_secret\_test) | Secret test | `string` | n/a | yes |
 | <a name="input_skip_final_snapshot"></a> [skip\_final\_snapshot](#input\_skip\_final\_snapshot) | Skip final snapshot | `bool` | `false` | no |
 | <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | Range of VPC cidr | `string` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC id | `string` | `""` | no |
