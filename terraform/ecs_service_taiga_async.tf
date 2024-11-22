@@ -89,10 +89,10 @@ module "ecs_service_taiga_async" {
           name  = "EMAIL_PORT"
           value = local.ecs.email_port
         },
-        {
-          name  = "EMAIL_HOST_USER"
-          value = local.ecs.email_host_user
-        },
+        # {
+        #   name  = "EMAIL_HOST_USER"
+        #   value = local.ecs.email_host_user
+        # },
         {
           name  = "RABBITMQ_USER"
           value = local.ecs.rabbitmq_user
@@ -119,6 +119,10 @@ module "ecs_service_taiga_async" {
         {
           name      = "TAIGA_SECRET_KEY"
           valueFrom = "${module.sm.secret_arn}:TAIGA_SECRET_KEY::"
+        },
+        {
+          name      = "EMAIL_HOST_USER"
+          valueFrom = "${module.sm.secret_arn}:EMAIL_HOST_USER_ID::"
         },
         {
           name      = "EMAIL_HOST_PASSWORD"

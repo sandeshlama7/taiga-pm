@@ -107,12 +107,12 @@ module "alb" {
       health_check = {
         enabled             = true
         healthy_threshold   = 2
-        interval            = 120
-        matcher             = "200-499"
+        interval            = 300
+        matcher             = "200-399"
         path                = "/"
         port                = "traffic-port"
         protocol            = "HTTP"
-        timeout             = 10
+        timeout             = 5
         unhealthy_threshold = 2
       }
       create_attachment = false
@@ -127,12 +127,12 @@ module "alb" {
       health_check = {
         enabled             = true
         healthy_threshold   = 2
-        interval            = 120
-        matcher             = "200-499"
-        path                = "/"
+        interval            = 300
+        matcher             = "200-399"
+        path                = "/api/v1/stats/discover"
         port                = "traffic-port"
         protocol            = "HTTP"
-        timeout             = 30
+        timeout             = 5
         unhealthy_threshold = 2
       }
       create_attachment = false
@@ -167,8 +167,8 @@ module "alb" {
       health_check = {
         enabled             = true
         healthy_threshold   = 2
-        interval            = 120
-        matcher             = "200-499"
+        interval            = 300
+        matcher             = "200,426"
         path                = "/events"
         port                = "traffic-port"
         protocol            = "HTTP"
@@ -188,8 +188,8 @@ module "alb" {
         enabled             = true
         healthy_threshold   = 2
         interval            = 120
-        matcher             = "200-499"
-        path                = "/"
+        matcher             = "200,404"
+        path                = "/_protected/"
         port                = "traffic-port"
         protocol            = "HTTP"
         timeout             = 30
@@ -199,6 +199,5 @@ module "alb" {
     }
 
   }
-
 
 }

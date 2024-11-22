@@ -38,12 +38,12 @@ module "ecs_service_taiga_nginx" {
       mount_points = [
         {
           sourceVolume  = "taiga-static-data"
-          containerPath = "/taiga/static" #Path where EFS will be mounted inside the container
+          containerPath = "/var/www/taiga/static" #Path where EFS will be mounted inside the container
           readOnly      = false
         },
         {
           sourceVolume  = "taiga-media-data"
-          containerPath = "/taiga/media" #Path where EFS will be mounted inside the container
+          containerPath = "/var/www/taiga/media" #Path where EFS will be mounted inside the container
           readOnly      = false
         }
       ]
@@ -52,21 +52,20 @@ module "ecs_service_taiga_nginx" {
         "sh",
         "-c",
         <<EOT
-        sed -i 's/nginx;/root;/' /etc/nginx/nginx.conf &&
         echo 'server {
           listen 80 default_server;
           client_max_body_size 100M;
           charset utf-8;
           location /static/ {
-            alias /taiga/static/;
+            alias /var/www/taiga/static/;
           }
           location /_protected/ {
             internal;
-            alias /taiga/media/;
+            alias /var/www/taiga/media/;
             add_header Content-disposition "attachment";
           }
           location /media/exports/ {
-            alias /taiga/media/exports/;
+            alias /var/www/taiga/media/exports/;
             add_header Content-disposition "attachment";
           }
           location /media/ {

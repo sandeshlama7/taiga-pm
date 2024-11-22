@@ -8,7 +8,7 @@ module "ecs" {
 
   cluster_name = local.ecs.ecs_cluster_name
 
-  depends_on = [null_resource.push_to_ecr_with_tag]
+  depends_on = [null_resource.push_to_ecr_with_tag, module.alb]
 
   # Capacity provider
   # Allocate 20% capacity to FARGATE and then split the remaining 80% capacity to 50/50 between FARGATE and FARGATE_SPOT

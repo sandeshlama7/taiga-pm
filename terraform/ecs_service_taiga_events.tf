@@ -6,8 +6,8 @@ module "ecs_service_taiga_events" {
   name        = local.ecs_service_taiga_events.name
   cluster_arn = module.ecs.cluster_arn
 
-  cpu          = 256
-  memory       = 512
+  cpu          = 512
+  memory       = 1024
   network_mode = "awsvpc"
 
   # Enables ECS Exec this helps in interacting with containers directly
@@ -46,6 +46,10 @@ module "ecs_service_taiga_events" {
         {
           name  = "RABBITMQ_USER"
           value = local.ecs.rabbitmq_default_user
+        },
+        {
+          name  = "TAIGA_EVENTS_RABBITMQ_HOST"
+          value = "taiga-events-rabbitmq.local"
         }
       ]
 

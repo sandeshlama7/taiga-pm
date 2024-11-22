@@ -87,10 +87,10 @@ module "ecs_service_taiga_back" {
           name  = "EMAIL_PORT"
           value = local.ecs.email_port
         },
-        {
-          name  = "EMAIL_HOST_USER"
-          value = local.ecs.email_host_user
-        },
+        # {
+        #   name  = "EMAIL_HOST_USER"
+        #   value = local.ecs.email_host_user
+        # },
         {
           name  = "RABBITMQ_USER"
           value = local.ecs.rabbitmq_user
@@ -117,6 +117,10 @@ module "ecs_service_taiga_back" {
         {
           name      = "POSTGRES_PASSWORD"
           valueFrom = "${module.sm.secret_arn}:POSTGRES_PASSWORD::"
+        },
+        {
+          name      = "EMAIL_HOST_USER"
+          valueFrom = "${module.sm.secret_arn}:EMAIL_HOST_USER_ID::"
         },
         {
           name      = "EMAIL_HOST_PASSWORD"

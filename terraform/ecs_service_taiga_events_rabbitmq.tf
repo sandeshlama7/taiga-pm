@@ -31,6 +31,41 @@ module "ecs_service_taiga_events_rabbitmq" {
           containerPort = local.ecs.container_port_5
 
           protocol = "tcp"
+        },
+        {
+          name          = "a"
+          containerPort = 4369
+          protocol      = "tcp"
+        },
+        {
+          name          = "b"
+          containerPort = 5671
+          protocol      = "tcp"
+        },
+        {
+          name          = "c"
+          containerPort = 15671
+          protocol      = "tcp"
+        },
+        {
+          name          = "d"
+          containerPort = 15672
+          protocol      = "tcp"
+        },
+        {
+          name          = "e"
+          containerPort = 15691
+          protocol      = "tcp"
+        },
+        {
+          name          = "f"
+          containerPort = 15692
+          protocol      = "tcp"
+        },
+        {
+          name          = "g"
+          containerPort = 25672
+          protocol      = "tcp"
         }
       ]
       readonly_root_filesystem = false

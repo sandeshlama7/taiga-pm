@@ -59,25 +59,25 @@ module "efs" {
 
   # Access point(s)
   access_points = {
-    rabbitmq_access = {
-      name = "rabbitmq-access"
-      root_directory = {
-        path = "/rabbitmq"
-        creation_info = {
-          owner_gid   = 1000
-          owner_uid   = 1000
-          permissions = "750"
-        }
-      }
-    }
+    # rabbitmq_access = {
+    #   name = "rabbitmq-access"
+    #   root_directory = {
+    #     path = "/rabbitmq"
+    #     creation_info = {
+    #       owner_gid   = 1000
+    #       owner_uid   = 1000
+    #       permissions = "750"
+    #     }
+    #   }
+    # }
 
     taiga-static-data = {
       name = "taiga-static-data"
       root_directory = {
         path = "/taiga-static-data"
         creation_info = {
-          owner_gid   = 1001
-          owner_uid   = 1001
+          owner_gid   = 101 # Nginx is running with gid and uid 101 which can be seen using 'id nginx' in terminal
+          owner_uid   = 101
           permissions = "750"
         }
       }
@@ -88,8 +88,8 @@ module "efs" {
       root_directory = {
         path = "/taiga-media-data"
         creation_info = {
-          owner_gid   = 1002
-          owner_uid   = 1002
+          owner_gid   = 101
+          owner_uid   = 101
           permissions = "750"
         }
       }
@@ -100,8 +100,8 @@ module "efs" {
       root_directory = {
         path = "/taiga-async-rabbitmq-data"
         creation_info = {
-          owner_gid   = 1003
-          owner_uid   = 1003
+          owner_gid   = 101
+          owner_uid   = 100
           permissions = "750"
         }
       }
@@ -112,8 +112,8 @@ module "efs" {
       root_directory = {
         path = "/taiga-events-rabbitmq-data"
         creation_info = {
-          owner_gid   = 1004
-          owner_uid   = 1004
+          owner_gid   = 101
+          owner_uid   = 100
           permissions = "750"
         }
       }

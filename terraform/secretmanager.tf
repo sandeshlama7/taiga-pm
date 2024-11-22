@@ -15,15 +15,9 @@ module "sm" {
     POSTGRES_PASSWORD      = random_password.db_password.result
     TAIGA_SECRET_KEY       = random_password.taiga_secret.result
     RABBITMQ_PASS          = random_password.rabbitmq_password.result
-    EMAIL_HOST_PASSWORD    = aws_iam_access_key.test.ses_smtp_password_v4 //random_password.email_host_password.result
+    EMAIL_HOST_USER_ID     = "Change this with desired value" // Since this is already created from console, I have manually edited secret manager from console once it is created.
+    EMAIL_HOST_PASSWORD    = "Change this with desired value" //aws_iam_access_key.test.ses_smtp_password_v4 //random_password.email_host_password.result
     RABBITMQ_ERLANG_COOKIE = random_password.rabbitmq_erlang_cookie.result
-    # RABBITMQ_DEFAULT_PASS  = random_password.rabbitmq_default_pass.result
-    # POSTGRES_PASSWORD      = data.aws_secretsmanager_random_password.db_password.random_password
-    # TAIGA_SECRET_KEY       = data.aws_secretsmanager_random_password.taiga_secret.random_password
-    # RABBITMQ_PASS          = data.aws_secretsmanager_random_password.rabbitmq_password.random_password
-    # EMAIL_HOST_PASSWORD    = data.aws_secretsmanager_random_password.email_host_password.random_password
-    # RABBITMQ_ERLANG_COOKIE = data.aws_secretsmanager_random_password.rabbitmq_erlang_cookie.random_password
-    # RABBITMQ_DEFAULT_PASS  = data.aws_secretsmanager_random_password.rabbitmq_default_pass.random_password
   })
 }
 
@@ -62,39 +56,3 @@ resource "random_password" "rabbitmq_default_pass" {
   special          = local.random_password.special
   override_special = local.random_password.override_special
 }
-
-# # data "aws_secretsmanager_random_password" "db_password" {
-# #   password_length     = local.random_password.password_length
-# #   exclude_punctuation = local.random_password.exclude_punctuation
-# #   include_space       = local.random_password.include_space
-# # }
-
-# # data "aws_secretsmanager_random_password" "taiga_secret" {
-# #   password_length     = local.random_password.password_length
-# #   exclude_punctuation = local.random_password.exclude_punctuation
-# #   include_space       = local.random_password.include_space
-# # }
-
-# # data "aws_secretsmanager_random_password" "rabbitmq_password" {
-# #   password_length     = local.random_password.password_length
-# #   exclude_punctuation = local.random_password.exclude_punctuation
-# #   include_space       = local.random_password.include_space
-# # }
-
-# # data "aws_secretsmanager_random_password" "email_host_password" {
-# #   password_length     = local.random_password.password_length
-# #   exclude_punctuation = local.random_password.exclude_punctuation
-# #   include_space       = local.random_password.include_space
-# # }
-
-# # data "aws_secretsmanager_random_password" "rabbitmq_erlang_cookie" {
-# #   password_length     = local.random_password.password_length
-# #   exclude_punctuation = local.random_password.exclude_punctuation
-# #   include_space       = local.random_password.include_space
-# # }
-
-# # data "aws_secretsmanager_random_password" "rabbitmq_default_pass" {
-# #   password_length     = local.random_password.password_length
-# #   exclude_punctuation = local.random_password.exclude_punctuation
-# #   include_space       = local.random_password.include_space
-# # }
