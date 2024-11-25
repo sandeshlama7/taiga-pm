@@ -23,21 +23,13 @@ resource "null_resource" "push_to_ecr_with_tag" {
     always_run = "${timestamp()}" # Forces it to rerun each time
   }
   provisioner "local-exec" {
-
-    # docker pull taigaio/taiga-front:latest &
-    # docker pull taigaio/taiga-back:latest &
-    # docker pull taigaio/taiga-protected:latest &
-    # docker pull taigaio/taiga-events:latest &
-    # docker pull rabbitmq:3.8-management-alpine &
-    # docker pull nginx:1.19-alpine
-    # wait
     command = <<EOT
     docker pull taigaio/taiga-front:latest &
     docker pull taigaio/taiga-back:latest &
     docker pull taigaio/taiga-protected:latest &
     docker pull taigaio/taiga-events:latest &
     docker pull rabbitmq:3.8-management-alpine &
-    docker pull nginx:1.19-alpine
+    docker pull nginx:1.19-alpine &
     wait
     
     aws ecr get-login-password --region ${local.region} | docker login --username AWS --password-stdin ${local.ecr_repo}

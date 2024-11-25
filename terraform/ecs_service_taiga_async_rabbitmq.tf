@@ -70,8 +70,6 @@ module "ecs_service_taiga_async_rabbitmq" {
       ]
       readonly_root_filesystem = false
 
-      # hostname = "taiga-async-rabbitmq"
-
       environment = [
         {
           name  = "RABBITMQ_DEFAULT_USER"

@@ -25,8 +25,7 @@ module "rds" {
   create_db_subnet_group = local.rds.create_db_subnet_group
   db_subnet_group_name   = local.rds.db_subnet_group_name
   skip_final_snapshot    = local.rds.skip_final_snapshot
-  #   create_random_password = local.rds.create_random_password
-  apply_immediately = true
+  apply_immediately      = true
 
   monitoring_interval                    = local.rds.monitoring_interval
   monitoring_role_name                   = local.rds.monitoring_role_name
@@ -37,13 +36,6 @@ module "rds" {
   enabled_cloudwatch_logs_exports        = local.rds.enabled_cloudwatch_logs_exports
   create_cloudwatch_log_group            = local.rds.create_cloudwatch_log_group
   cloudwatch_log_group_retention_in_days = local.rds.cloudwatch_log_group_retention_in_days
-
-  # parameters = [
-  #   {
-  #     name  = "rds.force_ssl"
-  #     value = 0
-  #   }
-  # ]
 
   tags = local.tags
 }

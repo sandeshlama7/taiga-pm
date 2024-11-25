@@ -11,7 +11,6 @@ module "ecs" {
   depends_on = [null_resource.push_to_ecr_with_tag, module.alb]
 
   # Capacity provider
-  # Allocate 20% capacity to FARGATE and then split the remaining 80% capacity to 50/50 between FARGATE and FARGATE_SPOT
   fargate_capacity_providers = {
     FARGATE = {
       default_capacity_provider_strategy = {

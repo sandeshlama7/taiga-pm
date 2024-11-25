@@ -52,11 +52,9 @@ locals {
     service_discovery_http_namespace_name        = "taiga-http-namespace-rabbitmq"
     service_discovery_private_dns_namespace_name = "taiga-pri-dns-namespace-rabbitmq"
 
-    # postgres_host      = split(":", module.rds.db_instance_endpoint)[0]
     postgres_user      = "taiga"
     postgre_db         = "taiga_db"
     taiga_sites_scheme = "https"
-    # taiga_sites_domain      = module.route53.route53_record_name
     taiga_subpath      = ""
     email_backend      = "django.core.mail.backends.smtp.EmailBackend"
     default_from_email = "sigdelsameep@gmail.com" //"sameep.sigdel@adex.ltd"
@@ -71,11 +69,7 @@ locals {
     front_public_register_enabled = "true"
     rabbitmq_default_user         = "taiga"
     rabbitmq_default_vhost        = "taiga"
-    # taiga_secret_key        = "${module.sm.secret_arn}:TAIGA_SECRET_KEY::"
   }
-
-  # taiga_url           = "http://${local.ecs.taiga_sites_domain}"
-  # taiga_websocket_url = "ws://${local.ecs.taiga_sites_domain}"
 
   taiga_sites_domain  = "taiga.sandbox.adex.ltd"
   taiga_url           = "https://taiga.sandbox.adex.ltd"
@@ -123,9 +117,8 @@ locals {
     create_lifecycle_policy = false
   }
 
-  ecr_repo       = split("/", "${module.ecr.repository_url}")[0]
-  aws_account_id = data.aws_caller_identity.current.account_id
-  # ecr_repository_url = data.aws_ecr_repository.service.repository_url
+  ecr_repo           = split("/", "${module.ecr.repository_url}")[0]
+  aws_account_id     = data.aws_caller_identity.current.account_id
   ecr_repository_url = "${local.aws_account_id}.dkr.ecr.us-east-1.amazonaws.com/${local.ecr.ecr_name}"
 
   efs = {
@@ -210,7 +203,8 @@ locals {
   }
 
   acm = {
-    validation_method = "DNS"
+    validation_method   = "DNS"
+    wait_for_validation = true
   }
 
   tags = {

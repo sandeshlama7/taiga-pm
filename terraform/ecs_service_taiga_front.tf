@@ -24,9 +24,7 @@ module "ecs_service_taiga_front" {
 
     (local.ecs.container_name_1) = {
       essential = true
-      # image     = "${module.ecr.repository_url}:front-latest"
-      # image     = "${local.ecr_repository_url}:front-latest"
-      image = "${local.ecr_repository_url}:front-latest"
+      image     = "${local.ecr_repository_url}:front-latest"
       port_mappings = [
         {
           name          = local.ecs.container_name_1

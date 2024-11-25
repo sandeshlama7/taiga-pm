@@ -35,13 +35,6 @@ module "ecs_service_taiga_async" {
       ]
       readonly_root_filesystem = false
 
-      # dependencies = [
-      #   {
-      #   containerName = local.ecs.container_name_5
-      #   condition = "START"
-      #   }
-      # ]
-
       entrypoint = ["/taiga-back/docker/async_entrypoint.sh"]
 
       environment = [
@@ -146,6 +139,7 @@ module "ecs_service_taiga_async" {
           readOnly      = false
         }
       ]
+
     }
   }
 
@@ -186,12 +180,4 @@ module "ecs_service_taiga_async" {
       discovery_name = local.ecs.container_7_discovery_name
     }
   }
-
-  # load_balancer = {
-  #   service_2 = {
-  #     target_group_arn = module.alb.target_groups["back_ecs_api_admin"].arn
-  #     container_name   = local.ecs.container_name_2
-  #     container_port   = local.ecs.container_port_2
-  #   }
-  # }
 }

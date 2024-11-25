@@ -38,12 +38,12 @@ module "ecs_service_taiga_nginx" {
       mount_points = [
         {
           sourceVolume  = "taiga-static-data"
-          containerPath = "/var/www/taiga/static" #Path where EFS will be mounted inside the container
+          containerPath = "taiga/static" #Path where EFS will be mounted inside the container
           readOnly      = false
         },
         {
           sourceVolume  = "taiga-media-data"
-          containerPath = "/var/www/taiga/media" #Path where EFS will be mounted inside the container
+          containerPath = "taiga/media" #Path where EFS will be mounted inside the container
           readOnly      = false
         }
       ]
@@ -52,20 +52,21 @@ module "ecs_service_taiga_nginx" {
         "sh",
         "-c",
         <<EOT
+        sed -i 's/nginx;/root;/' /etc/nginx/nginx.conf &&
         echo 'server {
           listen 80 default_server;
           client_max_body_size 100M;
           charset utf-8;
           location /static/ {
-            alias /var/www/taiga/static/;
+            alias /taiga/static/;
           }
           location /_protected/ {
             internal;
-            alias /var/www/taiga/media/;
+            alias /taiga/media/;
             add_header Content-disposition "attachment";
           }
           location /media/exports/ {
-            alias /var/www/taiga/media/exports/;
+            alias /taiga/media/exports/;
             add_header Content-disposition "attachment";
           }
           location /media/ {
@@ -98,8 +99,7 @@ module "ecs_service_taiga_nginx" {
     }
     ("taiga-media-data") = {
       efs_volume_configuration = {
-        file_system_id = module.efs.id
-        # root_directory     = "/" # This argument is ignored when using authorization_config
+        file_system_id     = module.efs.id
         transit_encryption = "ENABLED"
         authorization_config = {
           access_point_id = module.efs.access_points.taiga-media-data.id

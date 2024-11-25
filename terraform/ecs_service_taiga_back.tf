@@ -35,13 +35,6 @@ module "ecs_service_taiga_back" {
       ]
       readonly_root_filesystem = false
 
-      # dependencies = [
-      #   {
-      #   containerName = local.ecs.container_name_5
-      #   condition = "START"
-      #   }
-      # ]
-
       environment = [
         {
           name  = "POSTGRES_DB"
@@ -144,6 +137,7 @@ module "ecs_service_taiga_back" {
           readOnly      = false
         }
       ]
+
     }
   }
 

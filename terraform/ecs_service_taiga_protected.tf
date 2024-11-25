@@ -45,10 +45,6 @@ module "ecs_service_taiga_protected" {
         {
           name      = "SECRET_KEY"
           valueFrom = "${module.sm.secret_arn}:TAIGA_SECRET_KEY::"
-          # valueFrom = random_password.taiga_secret.result
-          # valueFrom = "secret password"
-          # valueFrom = local.ecs.taiga_secret_key
-          # valueFrom = "${data.aws_secretsmanager_secret.taiga_secret.arn}:TAIGA_SECRET_KEY::"
         }
       ]
     }
@@ -65,12 +61,4 @@ module "ecs_service_taiga_protected" {
       discovery_name = local.ecs.container_3_discovery_name
     }
   }
-
-  # load_balancer = {
-  #   service_4 = {
-  #     target_group_arn = module.alb.target_groups["media_ecs_protected"].arn
-  #     container_name   = local.ecs.container_name_3
-  #     container_port   = local.ecs.container_port_3
-  #   }
-  # }
 }

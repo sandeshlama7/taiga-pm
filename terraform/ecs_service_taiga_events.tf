@@ -35,21 +35,10 @@ module "ecs_service_taiga_events" {
       ]
       readonly_root_filesystem = false
 
-      # dependencies = [
-      #   {
-      #   containerName = local.ecs.container_name_5
-      #   condition = "START"
-      #   }
-      # ]
-
       environment = [
         {
           name  = "RABBITMQ_USER"
           value = local.ecs.rabbitmq_default_user
-        },
-        {
-          name  = "TAIGA_EVENTS_RABBITMQ_HOST"
-          value = "taiga-events-rabbitmq.local"
         }
       ]
 

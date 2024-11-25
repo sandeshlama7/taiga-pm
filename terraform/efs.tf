@@ -25,7 +25,6 @@ module "efs" {
       actions = [
         "elasticfilesystem:ClientMount",
         "elasticfilesystem:ClientWrite"
-        # "elasticfilesystem:ClientRootAccess"
       ]
       principals = [
         {
@@ -59,28 +58,21 @@ module "efs" {
 
   # Access point(s)
   access_points = {
-    # rabbitmq_access = {
-    #   name = "rabbitmq-access"
-    #   root_directory = {
-    #     path = "/rabbitmq"
-    #     creation_info = {
-    #       owner_gid   = 1000
-    #       owner_uid   = 1000
-    #       permissions = "750"
-    #     }
-    #   }
-    # }
 
     taiga-static-data = {
       name = "taiga-static-data"
-      root_directory = {
+      root_directory = { # Root directory is used to determine what ownership to give if no such folder exists
         path = "/taiga-static-data"
         creation_info = {
-          owner_gid   = 101 # Nginx is running with gid and uid 101 which can be seen using 'id nginx' in terminal
-          owner_uid   = 101
+          owner_gid   = 1001 # Nginx is running with gid and uid 101 which can be seen using 'id nginx' in terminal
+          owner_uid   = 1001
           permissions = "750"
         }
       }
+      # posix_user = { # Posix user is used to determine which user can perform read/ write operations.
+      #   gid = 101
+      #   uid = 101
+      # }
     }
 
     taiga-media-data = {
@@ -88,8 +80,8 @@ module "efs" {
       root_directory = {
         path = "/taiga-media-data"
         creation_info = {
-          owner_gid   = 101
-          owner_uid   = 101
+          owner_gid   = 1001
+          owner_uid   = 1001
           permissions = "750"
         }
       }
@@ -100,20 +92,19 @@ module "efs" {
       root_directory = {
         path = "/taiga-async-rabbitmq-data"
         creation_info = {
-          owner_gid   = 101
-          owner_uid   = 100
+          owner_gid   = 1001
+          owner_uid   = 1001
           permissions = "750"
         }
       }
     }
-
     taiga-events-rabbitmq-data = {
       name = "taiga-events-rabbitmq-data"
       root_directory = {
         path = "/taiga-events-rabbitmq-data"
         creation_info = {
-          owner_gid   = 101
-          owner_uid   = 100
+          owner_gid   = 1001
+          owner_uid   = 1001
           permissions = "750"
         }
       }
