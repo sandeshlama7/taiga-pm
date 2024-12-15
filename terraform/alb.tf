@@ -18,22 +18,20 @@ module "alb" {
       port     = local.alb.listener_port
       protocol = local.alb.listener_protocol
 
-      redirect = {
-        port        = "443"
-        protocol    = "HTTPS"
-        status_code = "HTTP_301"
-      }
-    }
-
-    https = {
-      port            = 443
-      protocol        = "HTTPS"
-      certificate_arn = module.acm.acm_certificate_arn
-
       forward = {
         target_group_key = "front_ecs"
         action_type      = "forward"
       }
+
+      # https = {
+      #   port            = 443
+      #   protocol        = "HTTPS"
+      #   certificate_arn = module.acm.acm_certificate_arn
+
+      #   forward = {
+      #     target_group_key = "front_ecs"
+      #     action_type      = "forward"
+      #   }
 
       rules = [
         {
