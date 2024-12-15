@@ -1,5 +1,5 @@
 module "naming" {
-  source = "git@github.com:adexltd/terraform-naming-convention-module.git"
+  source = "./modules/naming"
 
   app_name       = "taiga"
   project_prefix = "pm-infra"
@@ -8,7 +8,7 @@ module "naming" {
   environment    = var.naming_environment
   tags = {
     environment = var.naming_environment
-    project     = "adex-suite"
+    project     = "suite"
     terraform   = true
   }
 }

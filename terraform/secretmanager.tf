@@ -16,7 +16,7 @@ module "sm" {
     TAIGA_SECRET_KEY       = random_password.taiga_secret.result
     RABBITMQ_PASS          = random_password.rabbitmq_password.result
     EMAIL_HOST_USER_ID     = "Change this with desired value" // Since this is already created from console, I have manually edited secret manager from console once it is created.
-    EMAIL_HOST_PASSWORD    = "Change this with desired value" //aws_iam_access_key.test.ses_smtp_password_v4 //random_password.email_host_password.result
+    EMAIL_HOST_PASSWORD    = random_password.email_host_password.result // "Change this with desired value" //aws_iam_access_key.test.ses_smtp_password_v4 
     RABBITMQ_ERLANG_COOKIE = random_password.rabbitmq_erlang_cookie.result
   })
 }
