@@ -6,7 +6,7 @@ module "ses-clouddrove" {
   environment   = "sandbox"
   enable_domain = false
   enable_email  = true
-  emails        = ["sameep.sigdel@adex.ltd"]
+  emails        = ["sandeshislama7@gmail.com"]
   # domain = "adex.ltd"
   # iam_name = "taiga-ses" // If SCP allows
   # iam_name = "adex-poc-smtp" //created manually by other with required privilages and shared credentials to me.
