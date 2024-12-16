@@ -25,6 +25,9 @@ jobs:
       - name: Checkout Git Repo
         uses: actions/checkout@v4
 
+      - name: Check Docker
+        run: docker --version
+
       - name: Install Terraform on Runner
         uses: hashicorp/setup-terraform@v3
         with:
@@ -50,7 +53,7 @@ jobs:
         run: terraform plan -var-file=${{env.tf_vars_file}}
         working-directory: ${{env.tf_dir}}
 
-      # - name: Terraform apply
-      #   if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
-      #   run: terraform apply -var-file=${{env.tf_vars_file}} -auto-approve
-      #   working-directory: ${{env.tf_dir}}
+      - name: Terraform apply
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+        run: terraform apply -var-file=${{env.tf_vars_file}} -auto-approve
+        working-directory: ${{env.tf_dir}}
