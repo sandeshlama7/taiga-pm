@@ -1,0 +1,56 @@
+name: Infrastructure setup
+
+run-name: Infra provision by ${{ github.actor }} [${{ github.event.head_commit.message }}]
+
+on:
+  push:
+    branches: [ "*"]
+  workflow_dispatch:
+
+env:
+  tf_dir: terraform
+  backend_bucket: "codefrg-prod-uat-codefrg-root-as1-cf-p-s3"
+  backend_key: "test/taiga.tfstate"
+  backend_acl: "bucket-owner-full-control"
+  backend_region: "ap-south-1"
+  region: "us-east-1"
+  tf_vars_file: terraform.tfvars
+  tf_version: 1.9.5
+
+jobs:
+  infra-terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Git Repo
+        uses: actions/checkout@v4
+
+      - name: Install Terraform on Runner
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{env.tf_version}}
+          terraform_wrapper: false
+
+      - name: export AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.region }}
+
+      - name: Terraform Init
+        run: terraform init  -backend-config="bucket=${{env.backend_bucket}}" -backend-config="key=${{env.prod_backend_key}}"  --backend-config "acl=${{env.backend_acl}}" -backend-config="region=${{env.backend_region}}"
+        working-directory: ${{env.tf_dir}}
+
+      - name: Validate terraform
+        run: terraform validate
+        working-directory: ${{env.tf_dir}}
+
+      - name: Plan terraform
+        run: terraform plan -var-file=${{env.tf_vars_file}}
+        working-directory: ${{env.tf_dir}}
+
+      # - name: Terraform apply
+      #   if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
+      #   run: terraform apply -var-file=${{env.tf_vars_file}} -auto-approve
+      #   working-directory: ${{env.tf_dir}}
