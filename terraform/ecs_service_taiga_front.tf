@@ -36,14 +36,22 @@ module "ecs_service_taiga_front" {
       readonly_root_filesystem = false
 
       environment = [
+        # {
+        #   name  = "TAIGA_URL"
+        #   # value = local.taiga_url
+        #   value = module.alb.dns_name
+        # },
+        # {
+        #   name  = "TAIGA_WEBSOCKETS_URL"
+        #   value = "wss://${module.alb.dns_name}"
+        # },
         {
-          name  = "TAIGA_URL"
-          # value = local.taiga_url
+          name = "TAIGA_DOMAIN"
           value = module.alb.dns_name
         },
         {
-          name  = "TAIGA_WEBSOCKETS_URL"
-          value = "wss://${module.alb.dns_name}"
+          name = "WEBSOCKETS_SCHEME"
+          value = "wss"
         },
         {
           name  = "TAIGA_SUBPATH"
