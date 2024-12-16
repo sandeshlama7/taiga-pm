@@ -38,12 +38,13 @@ module "ecs_service_taiga_front" {
       environment = [
         {
           name  = "TAIGA_URL"
-          value = local.taiga_url
+          # value = local.taiga_url
+          value = module.alb.dns_name
         },
-        {
-          name  = "TAIGA_WEBSOCKETS_URL"
-          value = local.taiga_websocket_url
-        },
+        # {
+        #   name  = "TAIGA_WEBSOCKETS_URL"
+        #   value = local.taiga_websocket_url
+        # },
         {
           name  = "TAIGA_SUBPATH"
           value = ""
