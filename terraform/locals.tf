@@ -58,7 +58,7 @@ locals {
     taiga_subpath      = ""
     email_backend      = "django.core.mail.backends.smtp.EmailBackend"
     default_from_email = "sandeshislama7@gmail.com"
-    email_use_tls      = "True"
+    email_use_tls      = "False"
     email_use_ssl      = "False"
     email_host         = "email-smtp.us-east-1.amazonaws.com"
     email_port         = "587"

@@ -50,7 +50,8 @@ module "ecs_service_taiga_back" {
         },
         {
           name  = "TAIGA_SITES_DOMAIN"
-          value = local.taiga_sites_domain
+          # value = local.taiga_sites_domain
+          value = module.alb.dns_name
         },
         {
           name  = "TAIGA_SUBPATH"
