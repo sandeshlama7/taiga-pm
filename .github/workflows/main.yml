@@ -39,7 +39,7 @@ jobs:
           aws-region: ${{ env.region }}
 
       - name: Terraform Init
-        run: terraform init  -backend-config="bucket=${{env.backend_bucket}}" -backend-config="key=${{env.prod_backend_key}}"  --backend-config="acl=${{env.backend_acl}}" -backend-config="region=${{env.backend_region}}"
+        run: terraform init  -backend-config="bucket=${{env.backend_bucket}}" -backend-config="key=${{env.backend_key}}"  --backend-config="acl=${{env.backend_acl}}" -backend-config="region=${{env.backend_region}}"
         working-directory: ${{env.tf_dir}}
 
       - name: Validate terraform
