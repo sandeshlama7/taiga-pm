@@ -43,7 +43,7 @@ module "ecs_service_taiga_front" {
         },
         {
           name  = "TAIGA_WEBSOCKETS_URL"
-          value = "wss://${module.alb.dns.name}"
+          value = "wss://${module.alb.dns_name}"
         },
         {
           name  = "TAIGA_SUBPATH"
